@@ -1,6 +1,7 @@
-import nltk
+from nltk.corpus import wordnet
+from nltk.stem.wordnet import WordNetLemmatizer
 import itertools
-import win32com.client as win32
+import itertools
 
 
 
@@ -29,23 +30,4 @@ def Synonym_Checker(word1, word2):
     #match = [match or word in word2_set for word in word1_set][0]
 
     return match
-
-def excel_parse(file_path):
-	wb = excel.Workbooks.Open(file_path);
-	ws = wb.Worksheets("Sheet1")
-	#I assumed we have a table header in the first row
-	col = ws.Range("A2:A100")
-	for cell in col:
-		#we need to tokenize each row in the col, so we can compare the verbs
-		tokens = nltk.word_tokenize(cell)
-		print tokens
-	return 
-
-def main():
-	excel = win32.gencache.EnsureDispatch('Excel.Application')
-	excel.Visible = 1; 
-	excel_parse("temp")
-
-print main()
-
-#print Synonym_Checker("tomato", "Lycopersicon_esculentum")
+print Synonym_Checker("wash", "clean")

@@ -1,9 +1,19 @@
 from nltk import word_tokenize
 from nltk import pos_tag
 from nltk.corpus import wordnet as wn
-from nltk.corpus import wordnet_ic
 import xlrd
 from xlwt import Workbook
+
+def synonym_Checker(word1, word2):
+        """Checks if word1 and word2 and synonyms. Returns True if they are, otherwise False"""
+        syn1 = wn.synsets(word1, pos=wn.VERB)
+        syn2 = wn.synsets(word2, pos=wn.VERB)
+        for a in syn1:
+                for b in syn2:
+                        if (a.lch_similarity(b) > 1):
+                                return True
+        return False
+
 def get_verbs(sentence):
         #we tokenize the verbs in each sentence
         tokens = word_tokenize(sentence)
@@ -23,14 +33,14 @@ def iterate(filename):
                 newSheet.write(row,0,verbs)
         newBook.save('verbs.xls')
         
-def syn(word1, word2):
+#def syn(word1, word2):
         #we will need to get the synsets of each word.
         
-        return word1.res_similarity(word2, brown_ic)
+   #     return word1.res_similarity(word2, brown_ic)
 
 def main():
-        brown_ic = wordnet_ic.ic('ic-brown.dat')
-        print syn('cleaning','washing')
+        print synonym_Checker('cleaning','washing')
+
         #iterate('myfile.xlsx')
         
 if __name__ == "__main__":
