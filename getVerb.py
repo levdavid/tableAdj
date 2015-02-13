@@ -10,9 +10,9 @@ def synonym_Checker(word1, word2):
         syn2 = wn.synsets(word2, pos=wn.VERB)
         for a in syn1:
                 for b in syn2:
-                        if (a.lch_similarity(b) > 1):
-                                return True
-        return False
+                        if (a.lch_similarity(b) > 1.8):
+                                return a.lch_similarity(b)
+       	return 0
 
 def get_verbs(sentence):
         #we tokenize the verbs in each sentence
@@ -39,9 +39,9 @@ def iterate(filename):
    #     return word1.res_similarity(word2, brown_ic)
 
 def main():
-        print synonym_Checker('cleaning','washing')
-
-        #iterate('myfile.xlsx')
+        print synonym_Checker('smoking','acting')
+        
+	iterate('myfile.xlsx')
         
 if __name__ == "__main__":
         main()
